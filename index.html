@@ -48,6 +48,7 @@
             gap: 10px;
             max-width: 500px;
             margin: 0 auto;
+            margin-bottom: 20px;
         }
 
         input[type="email"] {
@@ -82,6 +83,22 @@
             transform: translateY(-2px);
         }
 
+        .telegram-button {
+            display: inline-block;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            background: linear-gradient(45deg, #0088cc, #0099ff);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .telegram-button:hover {
+            transform: translateY(-2px);
+        }
+
         .success-message {
             display: none;
             margin-top: 20px;
@@ -100,6 +117,11 @@
             button {
                 width: 100%;
             }
+
+            .telegram-button {
+                display: block;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -108,18 +130,33 @@
         <h1>Bounton</h1>
         <p class="subtitle">Revolutionizing Web3 Bounties on Telegram</p>
         <form class="waitlist-form" id="waitlistForm">
-            <input type="email" placeholder="Enter your email" required>
+            <input type="email" placeholder="Enter your email" required id="email-input">
             <button type="submit">Join Waitlist</button>
         </form>
+        <a href="https://t.me/+Sf9TIosnnEQ0NTY0" target="_blank" class="telegram-button">Join Telegram Group</a>
         <p class="success-message" id="successMessage">Thanks for joining! We'll keep you updated.</p>
     </div>
 
     <script>
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            // Here you would typically add code to submit the email to your backend
-            document.getElementById('successMessage').style.display = 'block';
-            this.reset();
+            const email = document.getElementById('email-input').value;
+            
+            // Replace with your Google Forms submission URL
+            const formUrl = 'YOUR_GOOGLE_FORM_URL';
+            
+            // You'll need to set up the Google Form and get the proper form URL and field names
+            fetch(formUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `entry.XXXXX=${encodeURIComponent(email)}`
+            }).then(() => {
+                document.getElementById('successMessage').style.display = 'block';
+                this.reset();
+            });
         });
     </script>
 </body>
